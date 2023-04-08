@@ -24,7 +24,20 @@ class RegisterViewModel {
             delegate?.validateForm(isValidForm())
         }
     }
+    
     var password = "" {
+        didSet {
+            delegate?.validateForm(isValidForm())
+        }
+    }
+    
+    var name = "" {
+        didSet {
+            delegate?.validateForm(isValidForm())
+        }
+    }
+    
+    var surname = "" {
         didSet {
             delegate?.validateForm(isValidForm())
         }
@@ -38,12 +51,15 @@ class RegisterViewModel {
         return false
     }
 
-    private func validatePassword(_ password: String) -> Bool {
-        return !password.trimmingCharacters(in: .whitespaces).isEmpty && !password.contains(" ")
+    private func validateTextfields() -> Bool {
+        if let _ = [password, name, surname].first(where: { $0.trimmingCharacters(in: .whitespaces).isEmpty || $0.contains(" ")  }) {
+            return false
+        }
+        return true
     }
 
     private func isValidForm() -> Bool {
-        return validateEmail(email) && validatePassword(password)
+        return validateEmail(email) && validateTextfields()
     }
 
     func registerUser() async {

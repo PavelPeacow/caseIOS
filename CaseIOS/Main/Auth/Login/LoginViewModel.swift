@@ -19,12 +19,12 @@ class LoginViewModel {
     
     let manager = APIManager()
     
-    var email = "" {
+    var email = "test@gmail.com" {
         didSet {
             delegate?.validateForm(isValidForm())
         }
     }
-    var password = "" {
+    var password = "teesttest" {
         didSet {
             delegate?.validateForm(isValidForm())
         }

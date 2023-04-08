@@ -12,13 +12,20 @@ class RegisterViewController: UIViewController {
     let viewModel = RegisterViewModel()
     
     lazy var authStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [registerTitle, emailTextfield, passwordTextfield, logInBtn, alreadyHaveAccountTitle])
+        let stackView = UIStackView(arrangedSubviews: [logoImageView, registerTitle, emailTextfield, passwordTextfield, nameTextfield, surnameTextfield, logInBtn, alreadyHaveAccountTitle])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.spacing = 16
         stackView.distribution = .fill
         stackView.alignment = .fill
         stackView.axis = .vertical
         return stackView
+    }()
+    
+    lazy var logoImageView: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "logo")
+        image.contentMode = .scaleAspectFit
+        return image
     }()
     
     lazy var registerTitle: UILabel = {
@@ -44,10 +51,24 @@ class RegisterViewController: UIViewController {
         return textfield
     }()
     
+    lazy var nameTextfield: MainInputTextfield = {
+        let textfield = MainInputTextfield(placeholder: "Name")
+        textfield.delegate = self
+        textfield.addTarget(self, action: #selector(didChangeNameText), for: .editingChanged)
+        return textfield
+    }()
+    
+    lazy var surnameTextfield: MainInputTextfield = {
+        let textfield = MainInputTextfield(placeholder: "Surname")
+        textfield.delegate = self
+        textfield.addTarget(self, action: #selector(didChangeSurnameText), for: .editingChanged)
+        return textfield
+    }()
+    
     lazy var logInBtn: UIButton = {
         let btn = UIButton()
         btn.backgroundColor = .selectColor
-        btn.setTitle("Log in", for: .normal)
+        btn.setTitle("Register", for: .normal)
         btn.setTitleColor(.black, for: .normal)
         btn.layer.cornerRadius = 12
         btn.addTarget(self, action: #selector(didTapLogInBtn), for: .touchUpInside)
@@ -129,6 +150,14 @@ extension RegisterViewController {
         viewModel.password = sender.text ?? ""
     }
     
+    @objc func didChangeNameText(_ sender: UITextField) {
+        viewModel.name = sender.text ?? ""
+    }
+    
+    @objc func didChangeSurnameText(_ sender: UITextField) {
+        viewModel.surname = sender.text ?? ""
+    }
+    
     @objc func didTapLogInBtn() {
         Task {
             await viewModel.registerUser()
@@ -145,8 +174,12 @@ extension RegisterViewController {
             authStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             authStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             
+            logoImageView.heightAnchor.constraint(equalToConstant: 100),
+            
             emailTextfield.heightAnchor.constraint(equalToConstant: 50),
             passwordTextfield.heightAnchor.constraint(equalToConstant: 50),
+            nameTextfield.heightAnchor.constraint(equalToConstant: 50),
+            surnameTextfield.heightAnchor.constraint(equalToConstant: 50),
             
             logInBtn.heightAnchor.constraint(equalToConstant: 50),
         ])

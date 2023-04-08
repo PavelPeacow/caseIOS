@@ -76,13 +76,14 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let token = TokenData.shared.token {
-            print(token)
-        }
+//        if let token = TokenData.shared.token {
+//            print(token)
+//            navigationController?.setViewControllers([ListViewController()], animated: true)
+//        }
         
         viewModel.delegate = self
         
-        setBtnState(isValid: false)
+        setBtnState(isValid: true)
        
         view.addSubview(authStackView)
         
@@ -143,6 +144,7 @@ extension LoginViewController {
     @objc func didTapLogInBtn() {
         Task {
             await viewModel.loginUser()
+            navigationController?.setViewControllers([TabBarViewController()], animated: true)
         }
     }
     

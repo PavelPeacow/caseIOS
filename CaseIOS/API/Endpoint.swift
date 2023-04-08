@@ -11,6 +11,7 @@ enum Endpoint {
     
     case register(user: RegisterUser)
     case login(user: RegisterUser)
+    case users
     
     var url: URL? {
         switch self {
@@ -18,6 +19,8 @@ enum Endpoint {
             return .init(string: "http://82.148.18.70:5001/auth/register")
         case .login:
             return .init(string: "http://82.148.18.70:5001/auth/login")
+        case .users:
+            return .init(string: "http://82.148.18.70:5001/users/all")
         }
     }
     
@@ -25,6 +28,8 @@ enum Endpoint {
         switch self {
         case .register, .login:
             return "POST"
+        case .users:
+            return "GET"
         }
     }
     
@@ -45,6 +50,9 @@ enum Endpoint {
             request.httpMethod = httpMethod
             request.httpBody = encodedUser
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        case .users:
+            request.httpMethod = httpMethod
+            request.setValue("Bearer \(TokenData.shared.token ?? "")", forHTTPHeaderField: "Authorization")
         }
         
         return request

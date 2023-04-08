@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		B526440F29E185A1007F37B5 /* TokenData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B526440E29E185A1007F37B5 /* TokenData.swift */; };
+		B526441129E18BE9007F37B5 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B526441029E18BE9007F37B5 /* ListViewController.swift */; };
+		B526441429E18CA2007F37B5 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B526441329E18CA2007F37B5 /* ListTableViewCell.swift */; };
+		B526441629E18FC7007F37B5 /* ListDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B526441529E18FC7007F37B5 /* ListDetailViewController.swift */; };
+		B526441829E194D7007F37B5 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B526441729E194D7007F37B5 /* TabBarViewController.swift */; };
+		B526441A29E19709007F37B5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B526441929E19709007F37B5 /* User.swift */; };
+		B526441C29E19838007F37B5 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B526441B29E19838007F37B5 /* ListViewModel.swift */; };
 		B5B945C229E153840032635C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B945C129E153840032635C /* AppDelegate.swift */; };
 		B5B945C429E153840032635C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B945C329E153840032635C /* SceneDelegate.swift */; };
 		B5B945C629E153840032635C /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B945C529E153840032635C /* RegisterViewController.swift */; };
@@ -26,6 +32,12 @@
 
 /* Begin PBXFileReference section */
 		B526440E29E185A1007F37B5 /* TokenData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenData.swift; sourceTree = "<group>"; };
+		B526441029E18BE9007F37B5 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		B526441329E18CA2007F37B5 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
+		B526441529E18FC7007F37B5 /* ListDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailViewController.swift; sourceTree = "<group>"; };
+		B526441729E194D7007F37B5 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		B526441929E19709007F37B5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		B526441B29E19838007F37B5 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		B5B945BE29E153840032635C /* CaseIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CaseIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5B945C129E153840032635C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5B945C329E153840032635C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -55,6 +67,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B526441D29E19920007F37B5 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				B526441329E18CA2007F37B5 /* ListTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		B526441E29E19927007F37B5 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				B526441029E18BE9007F37B5 /* ListViewController.swift */,
+				B526441529E18FC7007F37B5 /* ListDetailViewController.swift */,
+				B526441B29E19838007F37B5 /* ListViewModel.swift */,
+				B526441D29E19920007F37B5 /* Cell */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
 		B5B945B529E153840032635C = {
 			isa = PBXGroup;
 			children = (
@@ -107,7 +138,9 @@
 		B5B945D729E153F90032635C /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				B526441729E194D7007F37B5 /* TabBarViewController.swift */,
 				B5B945E929E172A40032635C /* Auth */,
+				B526441E29E19927007F37B5 /* List */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -135,6 +168,7 @@
 			children = (
 				B5B945E429E16B130032635C /* RegisterUser.swift */,
 				B5B945E729E16CE70032635C /* Token.swift */,
+				B526441929E19709007F37B5 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -242,13 +276,19 @@
 				B5B945DE29E1611A0032635C /* APIManager.swift in Sources */,
 				B5B945C629E153840032635C /* RegisterViewController.swift in Sources */,
 				B5B945E529E16B130032635C /* RegisterUser.swift in Sources */,
+				B526441129E18BE9007F37B5 /* ListViewController.swift in Sources */,
+				B526441629E18FC7007F37B5 /* ListDetailViewController.swift in Sources */,
 				B5B945D929E15E8F0032635C /* MainInputTextfield.swift in Sources */,
+				B526441829E194D7007F37B5 /* TabBarViewController.swift in Sources */,
 				B5B945F129E178FD0032635C /* RegisterViewModel.swift in Sources */,
 				B5B945C229E153840032635C /* AppDelegate.swift in Sources */,
 				B5B945DC29E15F0C0032635C /* Color.swift in Sources */,
 				B5B945C429E153840032635C /* SceneDelegate.swift in Sources */,
+				B526441C29E19838007F37B5 /* ListViewModel.swift in Sources */,
+				B526441A29E19709007F37B5 /* User.swift in Sources */,
 				B526440F29E185A1007F37B5 /* TokenData.swift in Sources */,
 				B5B945ED29E175780032635C /* LoginViewController.swift in Sources */,
+				B526441429E18CA2007F37B5 /* ListTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,6 +434,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -422,6 +463,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

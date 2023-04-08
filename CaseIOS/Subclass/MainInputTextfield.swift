@@ -18,13 +18,15 @@ class MainInputTextfield: UITextField {
         leftView = leftPadding
         leftViewMode = .always
         
+        autocorrectionType = .no
+        autocapitalizationType = .none
         
         textColor = .black
         backgroundColor = .selectColor
         
         layer.cornerRadius = 12
         
-        layer.borderColor = UIColor.systemGray6.cgColor
+        layer.borderColor = UIColor.gray.cgColor
         layer.borderWidth = 1
     }
     
