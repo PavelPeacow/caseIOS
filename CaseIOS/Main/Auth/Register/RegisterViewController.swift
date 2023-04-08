@@ -9,16 +9,25 @@ import UIKit
 
 class RegisterViewController: UIViewController {
     
-    let viewModel = AuthViewModel()
+    let viewModel = RegisterViewModel()
     
     lazy var authStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [emailTextfield, passwordTextfield, logInBtn])
+        let stackView = UIStackView(arrangedSubviews: [registerTitle, emailTextfield, passwordTextfield, logInBtn, alreadyHaveAccountTitle])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.spacing = 16
         stackView.distribution = .fill
         stackView.alignment = .fill
         stackView.axis = .vertical
         return stackView
+    }()
+    
+    lazy var registerTitle: UILabel = {
+        let label = UILabel()
+        label.text = "Register"
+        label.font = .systemFont(ofSize: 24, weight: .bold)
+        label.textAlignment = .center
+        label.textColor = .black
+        return label
     }()
     
     lazy var emailTextfield: MainInputTextfield = {
@@ -43,6 +52,18 @@ class RegisterViewController: UIViewController {
         btn.layer.cornerRadius = 12
         btn.addTarget(self, action: #selector(didTapLogInBtn), for: .touchUpInside)
         return btn
+    }()
+    
+    lazy var alreadyHaveAccountTitle: UILabel = {
+        let label = UILabel()
+        label.text = "Already have an account? Login."
+        label.font = .systemFont(ofSize: 18, weight: .semibold)
+        label.textAlignment = .center
+        label.textColor = .black
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapTitle))
+        label.addGestureRecognizer(gesture)
+        label.isUserInteractionEnabled = true
+        return label
     }()
 
     override func viewDidLoad() {
@@ -80,10 +101,10 @@ extension RegisterViewController: UITextFieldDelegate {
     
 }
 
-extension RegisterViewController: AuthViewModelDelegate {
+extension RegisterViewController: RegisterViewModelDelegate {
     
     func throwUserAlreadyExist() {
-        let ac = UIAlertController(title: "Error!", message: "User is already exists", preferredStyle: .alert)
+        let ac = UIAlertController(title: "Error!", message: "User is already exists!", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK!", style: .default))
         present(ac, animated: true)
     }
@@ -95,6 +116,10 @@ extension RegisterViewController: AuthViewModelDelegate {
 }
 
 extension RegisterViewController {
+    
+    @objc func didTapTitle() {
+        navigationController?.setViewControllers([LoginViewController()], animated: true)
+    }
     
     @objc func didChangeEmailText(_ sender: UITextField) {
         viewModel.email = sender.text ?? ""

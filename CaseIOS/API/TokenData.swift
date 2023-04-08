@@ -6,3 +6,29 @@
 //
 
 import Foundation
+
+class TokenData {
+    
+    static let shared = TokenData()
+    
+    private init() { }
+
+    var token: String? {
+        get {
+            UserDefaults.standard.string(forKey: "Token")
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: "Token")
+        }
+    }
+    
+    var tokenRefresh: String? {
+        get {
+            UserDefaults.standard.string(forKey: "TokenRefresh")
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: "TokenRefresh")
+        }
+    }
+
+}

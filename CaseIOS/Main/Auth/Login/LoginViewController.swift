@@ -9,10 +9,10 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
-    let viewModel = AuthViewModel()
+    let viewModel = LoginViewModel()
     
     lazy var authStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [loginTitle, emailTextfield, passwordTextfield, logInBtn])
+        let stackView = UIStackView(arrangedSubviews: [logoImageView, loginTitle, emailTextfield, passwordTextfield, logInBtn, dontHaveAccountTitle])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.spacing = 16
         stackView.distribution = .fill
@@ -21,11 +21,19 @@ class LoginViewController: UIViewController {
         return stackView
     }()
     
+    lazy var logoImageView: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "logo")
+        image.contentMode = .scaleAspectFit
+        return image
+    }()
+    
     lazy var loginTitle: UILabel = {
         let label = UILabel()
         label.text = "Login"
         label.font = .systemFont(ofSize: 24, weight: .bold)
         label.textAlignment = .center
+        label.textColor = .black
         return label
     }()
     
@@ -52,9 +60,25 @@ class LoginViewController: UIViewController {
         btn.addTarget(self, action: #selector(didTapLogInBtn), for: .touchUpInside)
         return btn
     }()
+    
+    lazy var dontHaveAccountTitle: UILabel = {
+        let label = UILabel()
+        label.text = "Dont't have an account? Register."
+        label.font = .systemFont(ofSize: 18, weight: .semibold)
+        label.textAlignment = .center
+        label.textColor = .black
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapTitle))
+        label.addGestureRecognizer(gesture)
+        label.isUserInteractionEnabled = true
+        return label
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let token = TokenData.shared.token {
+            print(token)
+        }
         
         viewModel.delegate = self
         
@@ -90,8 +114,8 @@ extension LoginViewController: UITextFieldDelegate {
 
 extension LoginViewController: AuthViewModelDelegate {
     
-    func throwUserAlreadyExist() {
-        let ac = UIAlertController(title: "Error!", message: "User is already exists", preferredStyle: .alert)
+    func throwUserNotFind() {
+        let ac = UIAlertController(title: "Error!", message: "User not found!", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK!", style: .default))
         present(ac, animated: true)
     }
@@ -104,6 +128,10 @@ extension LoginViewController: AuthViewModelDelegate {
 
 extension LoginViewController {
     
+    @objc func didTapTitle() {
+        navigationController?.setViewControllers([RegisterViewController()], animated: true)
+    }
+    
     @objc func didChangeEmailText(_ sender: UITextField) {
         viewModel.email = sender.text ?? ""
     }
@@ -114,7 +142,7 @@ extension LoginViewController {
     
     @objc func didTapLogInBtn() {
         Task {
-            await viewModel.registerUser()
+            await viewModel.loginUser()
         }
     }
     
@@ -127,6 +155,8 @@ extension LoginViewController {
             authStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             authStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             authStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            
+            logoImageView.heightAnchor.constraint(equalToConstant: 100),
             
             emailTextfield.heightAnchor.constraint(equalToConstant: 50),
             passwordTextfield.heightAnchor.constraint(equalToConstant: 50),

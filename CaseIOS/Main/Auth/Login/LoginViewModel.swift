@@ -9,7 +9,7 @@ import Foundation
 
 protocol AuthViewModelDelegate: AnyObject {
     func validateForm(_ isValid: Bool)
-    func throwUserAlreadyExist()
+    func throwUserNotFind()
 }
 
 @MainActor
@@ -46,15 +46,17 @@ class LoginViewModel {
         return validateEmail(email) && validatePassword(password)
     }
     
-    func registerUser() async {
+    func loginUser() async {
         let user = RegisterUser(email: email, password: password)
         do {
-            let result = try await manager.makeAPICall(type: Token.self, endpoint: .register(user: user))
+            let result = try await manager.makeAPICall(type: Token.self, endpoint: .login(user: user))
             print(result.accessToken)
+            TokenData.shared.token = result.accessToken
+            TokenData.shared.tokenRefresh = result.refreshToken
         } catch {
             print(error)
             if error as! APIError == APIError.userAlreadyExist {
-                delegate?.throwUserAlreadyExist()
+                delegate?.throwUserNotFind()
             }
         }
     }
