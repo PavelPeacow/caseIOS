@@ -120,7 +120,7 @@ class ListDetailViewController: UIViewController {
         setConstraints()
     }
     
-    func configure(user: User) {
+    func configure(user: UserGet) {
         print(user)
         
         emailTextfield.text = user.email
@@ -131,9 +131,9 @@ class ListDetailViewController: UIViewController {
         
         viewModel.email = user.email
         viewModel.password = "password"
-        viewModel.name = user.name ?? "NO NAME"
-        viewModel.surname = user.surname ?? "NO SURNAME"
-        viewModel.role = String(user.role ?? 1)
+        viewModel.name = user.name
+        viewModel.surname = user.surname
+        viewModel.role = String(user.role)
         
         viewModel.user = user
     }

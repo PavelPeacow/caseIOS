@@ -48,7 +48,7 @@ class ListDetailViewModel {
         }
     }
     
-    var user: User?
+    var user: UserGet?
     
     private func validateEmail(_ email: String) -> Bool {
         let regex = try? NSRegularExpression(pattern: "^[a-zA-Z0-9]+@[a-z0-9]+\\.[a-z]{2,}$")
