@@ -75,7 +75,7 @@ class ListTableViewCell: UITableViewCell {
         userId.text = String(user.id)
         userName.text = user.name ?? "NO NAME"
         userSurname.text = user.surname ?? "NO SURNAME1231312"
-        userRole.text = user.role ?? "NO ROLE"
+        userRole.text = String(user.role ?? 1)
     }
     
 }

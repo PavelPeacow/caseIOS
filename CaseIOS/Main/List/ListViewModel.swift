@@ -21,4 +21,14 @@ class ListViewModel {
         }
     }
     
+    func getUser(id: Int) async -> User? {
+        do {
+            let result = try await manager.makeAPICall(type: User.self, endpoint: .userGet(id: id))
+            return result
+        } catch {
+            print(error)
+            return nil
+        }
+    }
+    
 }

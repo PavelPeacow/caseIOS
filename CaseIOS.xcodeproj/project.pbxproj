@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B516BFFB29E1CB5500774A91 /* RolesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = B516BFFA29E1CB5500774A91 /* RolesEnum.swift */; };
+		B516BFFE29E1D71900774A91 /* MainButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B516BFFD29E1D71900774A91 /* MainButton.swift */; };
+		B516C00129E1D81400774A91 /* ListDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B516C00029E1D81400774A91 /* ListDetailViewModel.swift */; };
+		B516C00329E1E5A300774A91 /* UserPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = B516C00229E1E5A300774A91 /* UserPost.swift */; };
 		B526440F29E185A1007F37B5 /* TokenData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B526440E29E185A1007F37B5 /* TokenData.swift */; };
 		B526441129E18BE9007F37B5 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B526441029E18BE9007F37B5 /* ListViewController.swift */; };
 		B526441429E18CA2007F37B5 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B526441329E18CA2007F37B5 /* ListTableViewCell.swift */; };
@@ -31,6 +35,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B516BFFA29E1CB5500774A91 /* RolesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RolesEnum.swift; sourceTree = "<group>"; };
+		B516BFFD29E1D71900774A91 /* MainButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainButton.swift; sourceTree = "<group>"; };
+		B516C00029E1D81400774A91 /* ListDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailViewModel.swift; sourceTree = "<group>"; };
+		B516C00229E1E5A300774A91 /* UserPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPost.swift; sourceTree = "<group>"; };
 		B526440E29E185A1007F37B5 /* TokenData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenData.swift; sourceTree = "<group>"; };
 		B526441029E18BE9007F37B5 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		B526441329E18CA2007F37B5 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
@@ -67,6 +75,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B516BFFC29E1CB5A00774A91 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				B516BFFA29E1CB5500774A91 /* RolesEnum.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		B516BFFF29E1D80C00774A91 /* DetailView */ = {
+			isa = PBXGroup;
+			children = (
+				B526441529E18FC7007F37B5 /* ListDetailViewController.swift */,
+				B516C00029E1D81400774A91 /* ListDetailViewModel.swift */,
+			);
+			path = DetailView;
+			sourceTree = "<group>";
+		};
 		B526441D29E19920007F37B5 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -79,9 +104,9 @@
 			isa = PBXGroup;
 			children = (
 				B526441029E18BE9007F37B5 /* ListViewController.swift */,
-				B526441529E18FC7007F37B5 /* ListDetailViewController.swift */,
 				B526441B29E19838007F37B5 /* ListViewModel.swift */,
 				B526441D29E19920007F37B5 /* Cell */,
+				B516BFFF29E1D80C00774A91 /* DetailView */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -108,6 +133,7 @@
 				B5B945D629E153EE0032635C /* App */,
 				B5B945DF29E1611C0032635C /* API */,
 				B5B945E629E16B150032635C /* Model */,
+				B516BFFC29E1CB5A00774A91 /* Helper */,
 				B5B945DA29E15E920032635C /* Subclass */,
 				B5B945D729E153F90032635C /* Main */,
 				B5B945D529E153E30032635C /* Resoursec */,
@@ -149,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				B5B945D829E15E8F0032635C /* MainInputTextfield.swift */,
+				B516BFFD29E1D71900774A91 /* MainButton.swift */,
 			);
 			path = Subclass;
 			sourceTree = "<group>";
@@ -169,6 +196,7 @@
 				B5B945E429E16B130032635C /* RegisterUser.swift */,
 				B5B945E729E16CE70032635C /* Token.swift */,
 				B526441929E19709007F37B5 /* User.swift */,
+				B516C00229E1E5A300774A91 /* UserPost.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -270,11 +298,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B516BFFB29E1CB5500774A91 /* RolesEnum.swift in Sources */,
 				B5B945F329E179320032635C /* LoginViewModel.swift in Sources */,
+				B516BFFE29E1D71900774A91 /* MainButton.swift in Sources */,
 				B5B945E129E161730032635C /* Endpoint.swift in Sources */,
 				B5B945E829E16CE70032635C /* Token.swift in Sources */,
 				B5B945DE29E1611A0032635C /* APIManager.swift in Sources */,
 				B5B945C629E153840032635C /* RegisterViewController.swift in Sources */,
+				B516C00129E1D81400774A91 /* ListDetailViewModel.swift in Sources */,
 				B5B945E529E16B130032635C /* RegisterUser.swift in Sources */,
 				B526441129E18BE9007F37B5 /* ListViewController.swift in Sources */,
 				B526441629E18FC7007F37B5 /* ListDetailViewController.swift in Sources */,
@@ -285,6 +316,7 @@
 				B5B945DC29E15F0C0032635C /* Color.swift in Sources */,
 				B5B945C429E153840032635C /* SceneDelegate.swift in Sources */,
 				B526441C29E19838007F37B5 /* ListViewModel.swift in Sources */,
+				B516C00329E1E5A300774A91 /* UserPost.swift in Sources */,
 				B526441A29E19709007F37B5 /* User.swift in Sources */,
 				B526440F29E185A1007F37B5 /* TokenData.swift in Sources */,
 				B5B945ED29E175780032635C /* LoginViewController.swift in Sources */,

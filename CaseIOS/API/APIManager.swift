@@ -43,4 +43,14 @@ class APIManager {
         return result
     }
     
+    func makeNoAnswerCall(endpoint: Endpoint) async throws {
+        guard let request = endpoint.createRequest() else { throw APIError.badURL }
+        
+        guard let (_, resp) = try? await urlSession.data(for: request) else { throw APIError.canNotGet }
+        
+        if let httpResponse = resp as? HTTPURLResponse {
+            print(httpResponse.statusCode)
+        }
+    }
+    
 }

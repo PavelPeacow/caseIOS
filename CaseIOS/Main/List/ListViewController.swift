@@ -34,11 +34,27 @@ class ListViewController: UIViewController {
             tableView.reloadData()
         }
         
+        setNavBar()
         setConstraints()
     }
     
+    private func setNavBar() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .done, target: self, action: #selector(didTapAddPerson))
+    }
     
 
+}
+
+extension ListViewController {
+    
+    @objc func didTapAddPerson() {
+        print("add")
+        let vc = ListDetailViewController()
+        vc.setType(viewType: .addUser)
+        vc.delegate = self
+        present(vc, animated: true)
+    }
+    
 }
 
 extension ListViewController: UITableViewDataSource {
@@ -66,8 +82,30 @@ extension ListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let vc = ListDetailViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        let id = viewModel.people[indexPath.row].id
+        
+        Task {
+            if let user = await viewModel.getUser(id: id) {
+                let vc = ListDetailViewController()
+                vc.configure(user: user)
+                vc.setType(viewType: .changeUser)
+                vc.delegate = self
+                
+                navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+        
+    }
+    
+}
+
+extension ListViewController: ListDetailViewControllerDelegate {
+    
+    func didUpdateList() {
+        Task {
+            await viewModel.getPeopleList()
+            tableView.reloadData()
+        }
     }
     
 }
