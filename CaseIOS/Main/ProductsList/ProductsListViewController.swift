@@ -41,7 +41,6 @@ class ProductsListViewController: UIViewController {
     }
     
     private func setNavBar() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .done, target: self, action: #selector(didTapAddProduct))
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "list.bullet.rectangle.portrait"), style: .done, target: self, action: #selector(didTapExportBtn))
     }
     
@@ -50,16 +49,8 @@ class ProductsListViewController: UIViewController {
 
 extension ProductsListViewController {
     
-    @objc func didTapAddProduct() {
-        print("add")
-        let vc = ListDetailViewController()
-        vc.setType(viewType: .addUser)
-        vc.delegate = self
-        present(vc, animated: true)
-    }
-    
     @objc func didTapExportBtn() {
-        guard let url = URL(string: "") else { return }
+        guard let url = URL(string: "http://82.148.18.70/document") else { return }
         let vc = SFSafariViewController(url: url)
         present(vc, animated: true)
     }
@@ -98,7 +89,8 @@ extension ProductsListViewController: UITableViewDelegate {
         let category = viewModel.categories.first(where: { $0.id == product.category })?.title ?? "NO CATEGORY"
         
         let vc = ProductDetailViewController()
-        vc.configure(productTitle: product.title, category: category)
+        vc.configure(productTitle: product.title, category: category, id: product.id)
+        vc.delegate = self
         
         navigationController?.pushViewController(vc, animated: true)
         
@@ -106,7 +98,7 @@ extension ProductsListViewController: UITableViewDelegate {
     
 }
 
-extension ProductsListViewController: ListDetailViewControllerDelegate {
+extension ProductsListViewController: ProductDetailViewControllerDelegate {
     
     func didUpdateList() {
         Task {

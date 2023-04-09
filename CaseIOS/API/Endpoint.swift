@@ -21,6 +21,8 @@ enum Endpoint {
     case products
     case categories
     
+    case productDelete(id: Int)
+    
     func urlComponents(scheme: String = "http", host: String = "82.148.18.70", path: String) -> URL? {
         var components = URLComponents()
         components.scheme = scheme
@@ -47,8 +49,11 @@ enum Endpoint {
             
         case .products:
             return urlComponents(path: "/products/all")
+        case .productDelete(let id):
+            return urlComponents(path: "/products/\(id)")
         case .categories:
             return urlComponents(path: "/categories/all")
+            
         }
     }
     
@@ -58,7 +63,7 @@ enum Endpoint {
             return "POST"
         case .users, .products, .categories:
             return "GET"
-        case .userDelete:
+        case .userDelete, .productDelete:
             return "DELETE"
         case .userPut:
             return "PUT"
@@ -89,7 +94,7 @@ enum Endpoint {
         case  .userPost(let user):
             let encodedUser = try? JSONEncoder().encode(user)
             request.httpBody = encodedUser
-        case .userGet, .userDelete:
+        case .userGet, .userDelete, .productDelete:
             return request
             
         case .products, .categories:

@@ -7,10 +7,19 @@
 
 import UIKit
 
+protocol ProductDetailViewControllerDelegate: AnyObject {
+    func didUpdateList()
+}
+
+
 class ProductDetailViewController: UIViewController {
     
+    var id: Int?
+    
+    weak var delegate: ProductDetailViewControllerDelegate?
+    
     lazy var detailStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [productTitle, productCategory])
+        let stackView = UIStackView(arrangedSubviews: [productTitle, productCategory, deleteProductBtn])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.spacing = 16
         stackView.distribution = .fill
@@ -28,6 +37,13 @@ class ProductDetailViewController: UIViewController {
         let textfield = MainInputTextfield(placeholder: "Product category")
         return textfield
     }()
+    
+    lazy var deleteProductBtn: MainButton = {
+        let btn = MainButton(title: "Delete")
+        btn.backgroundColor = .red
+        btn.addTarget(self, action: #selector(didTapDeleteBtn), for: .touchUpInside)
+        return btn
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,10 +54,36 @@ class ProductDetailViewController: UIViewController {
         setConstraints()
     }
   
-    func configure(productTitle: String, category: String) {
+    func configure(productTitle: String, category: String, id: Int) {
         self.productTitle.text = productTitle
         productCategory.text = category
+        self.id = id
     }
+}
+
+extension ProductDetailViewController {
+    
+    @objc func didTapDeleteBtn() {
+        print("delete")
+        
+        Task {
+            if let id = id {
+                await deleteProduct(id: id)
+                delegate?.didUpdateList()
+                _ = navigationController?.popViewController(animated: true)
+            }
+        }
+       
+    }
+    
+    func deleteProduct(id: Int) async {
+        do {
+            try await APIManager().makeNoAnswerCall(endpoint: .productDelete(id: id))
+        } catch {
+            print(error)
+        }
+    }
+    
 }
 
 extension ProductDetailViewController {
@@ -55,6 +97,8 @@ extension ProductDetailViewController {
             
             productTitle.heightAnchor.constraint(equalToConstant: 50),
             productCategory.heightAnchor.constraint(equalToConstant: 50),
+            
+            deleteProductBtn.heightAnchor.constraint(equalToConstant: 35),
         ])
     }
     
