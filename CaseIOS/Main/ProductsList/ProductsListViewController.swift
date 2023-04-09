@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class ProductsListViewController: UIViewController {
     
@@ -40,7 +41,8 @@ class ProductsListViewController: UIViewController {
     }
     
     private func setNavBar() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .done, target: self, action: #selector(didTapAddPerson))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .done, target: self, action: #selector(didTapAddProduct))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "list.bullet.rectangle.portrait"), style: .done, target: self, action: #selector(didTapExportBtn))
     }
     
     
@@ -48,11 +50,17 @@ class ProductsListViewController: UIViewController {
 
 extension ProductsListViewController {
     
-    @objc func didTapAddPerson() {
+    @objc func didTapAddProduct() {
         print("add")
         let vc = ListDetailViewController()
         vc.setType(viewType: .addUser)
         vc.delegate = self
+        present(vc, animated: true)
+    }
+    
+    @objc func didTapExportBtn() {
+        guard let url = URL(string: "") else { return }
+        let vc = SFSafariViewController(url: url)
         present(vc, animated: true)
     }
     
@@ -86,18 +94,13 @@ extension ProductsListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        //        let id = viewModel.people[indexPath.row].id
-        //
-        //        Task {
-        //            if let user = await viewModel.getUser(id: id) {
-        //                let vc = ListDetailViewController()
-        //                vc.configure(user: user)
-        //                vc.setType(viewType: .changeUser)
-        //                vc.delegate = self
-        //
-        //                navigationController?.pushViewController(vc, animated: true)
-        //            }
-        //        }
+        let product = viewModel.products[indexPath.row]
+        let category = viewModel.categories.first(where: { $0.id == product.category })?.title ?? "NO CATEGORY"
+        
+        let vc = ProductDetailViewController()
+        vc.configure(productTitle: product.title, category: category)
+        
+        navigationController?.pushViewController(vc, animated: true)
         
     }
     

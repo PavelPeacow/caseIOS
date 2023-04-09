@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class ListViewController: UIViewController {
     
@@ -40,6 +41,7 @@ class ListViewController: UIViewController {
     
     private func setNavBar() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .done, target: self, action: #selector(didTapAddPerson))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "list.bullet.rectangle.portrait"), style: .done, target: self, action: #selector(didTapExportBtn))
     }
     
 
@@ -52,6 +54,12 @@ extension ListViewController {
         let vc = ListDetailViewController()
         vc.setType(viewType: .addUser)
         vc.delegate = self
+        present(vc, animated: true)
+    }
+    
+    @objc func didTapExportBtn() {
+        guard let url = URL(string: "") else { return }
+        let vc = SFSafariViewController(url: url)
         present(vc, animated: true)
     }
     
@@ -83,7 +91,7 @@ extension ListViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let id = viewModel.people[indexPath.row].id
-        
+        print(id)
         Task {
             if let user = await viewModel.getUser(id: id) {
                 let vc = ListDetailViewController()

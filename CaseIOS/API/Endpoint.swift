@@ -39,7 +39,7 @@ enum Endpoint {
             return urlComponents(path: "/users/all")
             
         case .userGet(let id):
-            return urlComponents(path: "/users/1")
+            return urlComponents(path: "/users/\(id)")
         case .userDelete(let id):
             return urlComponents(path: "/users/\(id)")
         case .userPut, .userPost:

@@ -127,7 +127,7 @@ class ListDetailViewController: UIViewController {
         passwordTextfield.text = "password"
         nameTextfield.text = user.name
         surnameTextfield.text = user.surname
-        changeRoleTextfield.text = String(user.role ?? 228)
+        changeRoleTextfield.text = String(user.role)
         
         viewModel.email = user.email
         viewModel.password = "password"
